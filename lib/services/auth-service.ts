@@ -13,13 +13,23 @@ export const registerUser = async (input: RegisterInput): Promise<string> => {
 
   const passwordHash = await bcrypt.hash(data.password, 10);
 
-  const [company] = await db
-    .insert(companies)
-    .values({
-      nome: data.empresaNome,
-      cnpj: data.cnpj
-    })
-    .returning();
+  const [existingCompany] = await db
+    .select()
+    .from(companies)
+    .where(eq(companies.cnpj, data.cnpj))
+    .limit(1);
+
+  const company =
+    existingCompany ??
+    (
+      await db
+        .insert(companies)
+        .values({
+          nome: data.empresaNome,
+          cnpj: data.cnpj
+        })
+        .returning()
+    )[0];
 
   const [user] = await db
     .insert(users)
