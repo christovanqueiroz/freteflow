@@ -48,7 +48,10 @@ export default function RegisterPage() {
         {error ? <p className="text-sm text-red-600">{error}</p> : null}
         <div className="flex justify-between items-center">
           <Button type="submit">Registrar</Button>
-          <Link href="/login" className="ml-2 text-sm text-blue-600 hover:underline">Já tem conta? Faça login</Link>
+          <div className="flex flex-col items-end gap-1">
+            <Link href="/companies/new" className="text-sm text-blue-600 hover:underline">Cadastre sua empresa</Link>
+            <Link href="/login" className="text-sm text-blue-600 hover:underline">Já tem conta? Faça login</Link>
+          </div>
         </div>
       </form>
     </div>
