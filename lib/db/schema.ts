@@ -42,7 +42,7 @@ export const users = pgTable("users", {
 export const drivers = pgTable("drivers", {
   id: serial("id").primaryKey(),
   nome: varchar("nome", { length: 120 }).notNull(),
-  cpf: varchar("cpf", { length: 14 }).notNull(),
+  cpf: varchar("cpf", { length: 14 }).notNull().unique(),
   telefone: varchar("telefone", { length: 20 }).notNull(),
   empresaId: integer("empresa_id")
     .notNull()
@@ -52,7 +52,7 @@ export const drivers = pgTable("drivers", {
 
 export const vehicles = pgTable("vehicles", {
   id: serial("id").primaryKey(),
-  placa: varchar("placa", { length: 10 }).notNull(),
+  placa: varchar("placa", { length: 10 }).notNull().unique(),
   modelo: varchar("modelo", { length: 120 }).notNull(),
   consumoMedioKmL: decimal("consumo_medio_km_l", { precision: 10, scale: 2 }).notNull(),
   empresaId: integer("empresa_id")

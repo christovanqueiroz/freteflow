@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import Link from "next/link";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -45,7 +46,10 @@ export default function RegisterPage() {
         <Input placeholder="Empresa" required value={form.empresaNome} onChange={(event) => setForm((prev) => ({ ...prev, empresaNome: event.target.value }))} />
         <Input placeholder="CNPJ" required value={form.cnpj} onChange={(event) => setForm((prev) => ({ ...prev, cnpj: event.target.value }))} />
         {error ? <p className="text-sm text-red-600">{error}</p> : null}
-        <Button type="submit">Registrar</Button>
+        <div className="flex justify-between items-center">
+          <Button type="submit">Registrar</Button>
+          <Link href="/login" className="ml-2 text-sm text-blue-600 hover:underline">Já tem conta? Faça login</Link>
+        </div>
       </form>
     </div>
   );

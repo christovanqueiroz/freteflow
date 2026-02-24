@@ -19,9 +19,11 @@ export async function POST(request: Request) {
   try {
     const auth = await getAuthFromCookies();
     const body = await request.json();
+      console.log("Body recebido:", body)
     const trip = await createTrip(auth.empresaId, body);
     return NextResponse.json(trip, { status: 201 });
   } catch (error) {
+    console.error("Erro ao criar viagem:", error);
     return NextResponse.json(
       { error: error instanceof Error ? error.message : "Erro ao criar viagem" },
       { status: 400 }

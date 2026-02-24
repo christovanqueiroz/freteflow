@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import Link from "next/link";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -48,7 +49,10 @@ export default function LoginPage() {
           onChange={(event) => setForm((prev) => ({ ...prev, password: event.target.value }))}
         />
         {error ? <p className="text-sm text-red-600">{error}</p> : null}
-        <Button type="submit">Entrar</Button>
+        <div className="flex justify-between items-center">
+          <Button type="submit">Entrar</Button>
+          <Link href="/register" className="ml-2 text-sm text-blue-600 hover:underline">Não tem conta? Cadastre-se</Link>
+        </div>
       </form>
     </div>
   );
