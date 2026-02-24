@@ -11,15 +11,17 @@ type LoginInput = typeof loginSchema._type;
 export const registerUser = async (input: RegisterInput): Promise<string> => {
   const data = registerSchema.parse(input);
 
-  const passwordHash = await bcrypt.hash(data.password, 10);
-
   const [company] = await db
-    .insert(companies)
-    .values({
-      nome: data.empresaNome,
-      cnpj: data.cnpj
-    })
-    .returning();
+    .select()
+    .from(companies)
+    .where(eq(companies.id, data.empresaId))
+    .limit(1);
+
+  if (!company) {
+    throw new Error("Empresa não encontrada");
+  }
+
+  const passwordHash = await bcrypt.hash(data.password, 10);
 
   const [user] = await db
     .insert(users)
