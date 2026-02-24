@@ -20,6 +20,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <Link href="/dashboard">Dashboard</Link>
               <Link href="/trips">Viagens</Link>
               <Link href="/drivers">Motoristas</Link>
+              <Link href="/vehicles/new">Veículos</Link>
             </nav>
           </div>
         </header>
